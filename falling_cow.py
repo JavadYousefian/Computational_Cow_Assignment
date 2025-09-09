@@ -107,6 +107,58 @@ def simulate_fall(initial_x, initial_y, initial_vx, initial_vy, dt, drag_coef):
     results['energy'].append(calculate_energy(0.0, vx, vy))
     return results
 
+# Getting inputs from the user
+print("Falling Cow Simulator")
+DRAG_COEFFICIENT = float(input("Enter drag force constant: "))
+INITIAL_X = float(input("Enter initial x position (m): "))
+INITIAL_Y = float(input("Enter initial y position (m): "))
+INITIAL_VX = float(input("Enter initial x velocity (m/s): "))
+INITIAL_VY = float(input("Enter initial y velocity (m/s): "))
+TIME_STEP = float(input("Enter time step size (s): "))
+def plot_results(results):
+    """Plot position, velocity, and energy as functions of time"""
+    fig, axes = plt.subplots(3, 1, figsize=(10, 12))
+    # Convert to numpy arrays
+    times = np.array(results['time'])
+    x_vals = np.array(results['x'])
+    y_vals = np.array(results['y'])
+    vx_vals = np.array(results['vx'])
+    vy_vals = np.array(results['vy'])
+    energies = np.array(results['energy'])
+    # Position vs Time
+    axes[0].plot(times, x_vals, label='X Position', color='blue')
+    axes[0].plot(times, y_vals, label='Y Position', color='red')
+    axes[0].set_xlabel('Time (s)')
+    axes[0].set_ylabel('Position (m)')
+    axes[0].set_title('Position vs Time')
+    axes[0].legend()
+    axes[0].grid(True)
+    # Velocity vs Time
+    axes[1].plot(times, vx_vals, label='X Velocity', color='blue')
+    axes[1].plot(times, vy_vals, label='Y Velocity', color='red')
+    axes[1].set_xlabel('Time (s)')
+    axes[1].set_ylabel('Velocity (m/s)')
+    axes[1].set_title('Velocity vs Time')
+    axes[1].legend()
+    axes[1].grid(True)
+    # Energy vs Time
+    axes[2].plot(times, energies[:, 0], label='Potential Energy', color='green')
+    axes[2].plot(times, energies[:, 1], label='Kinetic Energy', color='orange')
+    axes[2].plot(times, energies[:, 2], label='Total Energy', color='purple')
+    axes[2].set_xlabel('Time (s)')
+    axes[2].set_ylabel('Energy (J)')
+    axes[2].set_title('Energy vs Time')
+    axes[2].legend()
+    axes[2].grid(True)
+    plt.tight_layout()
+    plt.show()
+# Run simulation
+results = simulate_fall(INITIAL_X, INITIAL_Y, INITIAL_VX, INITIAL_VY, TIME_STEP, DRAG_COEFFICIENT)
+# Print summary
+print(f"Final position: ({results['x'][-1]:.2f}, {results['y'][-1]:.2f}) meters")
+print(f"Final velocity: ({results['vx'][-1]:.2f}, {results['vy'][-1]:.2f}) m/s")
+# Plot results
+plot_results(results)
 
 
 
