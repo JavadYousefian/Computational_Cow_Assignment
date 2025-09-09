@@ -60,3 +60,54 @@ def update_physics(x, y, vx, vy, Fx, Fy, dt):
     y_new = y + vy_new * dt
     
     return x_new, y_new, vx_new, vy_new
+
+# This is the third function question asked us for calculating E, K, and u
+def calculate_energy(y, vx, vy):
+    """Calculate energy values"""
+    # Potential Energy (U)
+    pe = mass * gravity_constant * y
+    # Kinetic energy (T or K)
+    ke = 0.5 * mass * (vx ** 2 + vy ** 2)
+    # Total energy or E
+    te = pe + ke
+    return pe, ke, te
+# Now we define the function for plotting position, velocity, or energy as a function of time
+def simulate_fall(initial_x, initial_y, initial_vx, initial_vy, dt, drag_coef):
+    """Run simulation until cow hits ground"""
+    x, y = initial_x, initial_y
+    vx, vy = initial_vx, initial_vy
+    t = 0.0
+    # Store results
+    results = {
+        'time': [], 'x': [], 'y': [],
+        'vx': [], 'vy': [], 'energy': []
+    }
+       # Simulation loop
+    while y > 0:
+        # Store current state
+        # As we want to plot and we need an array to have so we can plot like x = [1, 2, 3, 4], y = [5, 6, 7, 8]
+        results['time'].append(t)
+        results['x'].append(x)
+        results['y'].append(y)
+        results['vx'].append(vx)
+        results['vy'].append(vy)
+        results['energy'].append(calculate_energy(y, vx, vy))
+        # Calculate forces
+        Fx, Fy = calculate_forces(vx, vy, drag_coef)
+        # Update physics
+        x, y, vx, vy = update_physics(x, y, vx, vy, Fx, Fy, dt)
+        # Increment time
+        t += dt
+    # Add final ground position
+    results['time'].append(t)
+    results['x'].append(x)
+    results['y'].append(0.0)
+    results['vx'].append(vx)
+    results['vy'].append(vy)
+    results['energy'].append(calculate_energy(0.0, vx, vy))
+    return results
+
+
+
+
+
