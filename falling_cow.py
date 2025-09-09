@@ -107,14 +107,6 @@ def simulate_fall(initial_x, initial_y, initial_vx, initial_vy, dt, drag_coef):
     results['energy'].append(calculate_energy(0.0, vx, vy))
     return results
 
-# Getting inputs from the user
-print("Falling Cow Simulator")
-DRAG_COEFFICIENT = float(input("Enter drag force constant: "))
-INITIAL_X = float(input("Enter initial x position (m): "))
-INITIAL_Y = float(input("Enter initial y position (m): "))
-INITIAL_VX = float(input("Enter initial x velocity (m/s): "))
-INITIAL_VY = float(input("Enter initial y velocity (m/s): "))
-TIME_STEP = float(input("Enter time step size (s): "))
 def plot_results(results):
     """Plot position, velocity, and energy as functions of time"""
     fig, axes = plt.subplots(3, 1, figsize=(10, 12))
