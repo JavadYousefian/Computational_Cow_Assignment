@@ -1,0 +1,25 @@
+1. Is energy conserved as a function of time? To what level of precision?
+
+No, energy is not conserved. Energy decreases over time due to air resistance (drag force). The level of precision depends on:
+
+Drag coefficient: Higher drag → faster energy loss.
+ - For example we gave drag constant 1, v_x = 4, v_y = 3, x_0 = 0, y_0 = 100. E changed from 10^6 to near 0.6 * 10^6, so we had a 0.4 * 10^6 difference (40% error). By changing the parameters, it was changed.
+Time step size: Smaller Δt → better numerical precision
+
+2. How does the trajectory change if you change the time step? What about as you make the time step approach zero? 
+
+For Large time steps: Rough, jagged trajectory, and we will have big errors in path and energy. We tried different time steps and saw overshooting, which is not accurate and good. But for small time steps: Smooth, accurate trajectory and small errors. Also, when Time step → zero: Perfectly smooth path and no errors.
+
+3. How does your trajectory compare to the analytic solution if you set air resistance to zero?
+
+Analytic solution (the formula for x = x_0 + vt - 1/2gt^2 I mean) : Perfect trajectory and smooth mathematical curve
+
+Numerical solution that the code is doing:
+
+Small time steps (0.01s): Almost perfect match
+Large time steps (0.1s): Visible errors - path slightly wrong
+Very large time steps (1.0s): Completely wrong
+
+
+
+
