@@ -18,7 +18,7 @@ Numerical solution that the code is doing:
 
 Small time steps (0.01s): Almost perfect match
 Large time steps (0.1s): Visible errors - path slightly wrong
-Very large time steps (1.0s): Completely wrong
+Very large time steps (1.0s): wrong
 
 
 
